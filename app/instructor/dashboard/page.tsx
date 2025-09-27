@@ -462,31 +462,31 @@ export default function InstructorDashboardPage() {
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={monthlyRevenueData}>
                         <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-                        <XAxis 
-                          dataKey="month" 
+                        <XAxis
+                          dataKey="month"
                           className="text-gray-600"
                           tick={{ fontSize: 12 }}
                         />
-                        <YAxis 
+                        <YAxis
                           className="text-gray-600"
                           tick={{ fontSize: 12 }}
                         />
-                        <Tooltip 
+                        <Tooltip
                           formatter={(value, name) => [
-                            `${value}M VNĐ`, 
+                            `${value}M VNĐ`,
                             name === 'revenue' ? 'Doanh thu' : 'Khóa học bán'
                           ]}
                           labelStyle={{ color: '#374151' }}
-                          contentStyle={{ 
-                            backgroundColor: 'white', 
+                          contentStyle={{
+                            backgroundColor: 'white',
                             border: '1px solid #e5e7eb',
                             borderRadius: '8px'
                           }}
                         />
-                        <Line 
-                          type="monotone" 
-                          dataKey="revenue" 
-                          stroke="#3B82F6" 
+                        <Line
+                          type="monotone"
+                          dataKey="revenue"
+                          stroke="#3B82F6"
                           strokeWidth={3}
                           dot={{ fill: '#3B82F6', strokeWidth: 2, r: 4 }}
                           activeDot={{ r: 6, stroke: '#3B82F6', strokeWidth: 2 }}
@@ -508,30 +508,30 @@ export default function InstructorDashboardPage() {
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={courseRevenueData} layout="horizontal">
                         <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-                        <XAxis 
-                          type="number" 
+                        <XAxis
+                          type="number"
                           className="text-gray-600"
                           tick={{ fontSize: 12 }}
                         />
-                        <YAxis 
-                          type="category" 
-                          dataKey="name" 
+                        <YAxis
+                          type="category"
+                          dataKey="name"
                           className="text-gray-600"
                           tick={{ fontSize: 10 }}
                           width={120}
                         />
-                        <Tooltip 
+                        <Tooltip
                           formatter={(value) => [`${value}M VNĐ`, 'Doanh thu']}
                           labelStyle={{ color: '#374151' }}
-                          contentStyle={{ 
-                            backgroundColor: 'white', 
+                          contentStyle={{
+                            backgroundColor: 'white',
                             border: '1px solid #e5e7eb',
                             borderRadius: '8px'
                           }}
                         />
-                        <Bar 
-                          dataKey="revenue" 
-                          fill="#10B981" 
+                        <Bar
+                          dataKey="revenue"
+                          fill="#10B981"
                           radius={[0, 4, 4, 0]}
                         />
                       </BarChart>
@@ -566,10 +566,10 @@ export default function InstructorDashboardPage() {
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip 
+                        <Tooltip
                           formatter={(value) => [`${value}M VNĐ`, 'Doanh thu']}
-                          contentStyle={{ 
-                            backgroundColor: 'white', 
+                          contentStyle={{
+                            backgroundColor: 'white',
                             border: '1px solid #e5e7eb',
                             borderRadius: '8px'
                           }}
@@ -577,14 +577,14 @@ export default function InstructorDashboardPage() {
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <h4 className="font-medium text-gray-900 mb-4">Chi tiết theo khóa học:</h4>
                     {courseRevenueData.map((course, index) => (
                       <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
                         <div className="flex items-center gap-3">
-                          <div 
-                            className="w-4 h-4 rounded" 
+                          <div
+                            className="w-4 h-4 rounded"
                             style={{ backgroundColor: course.color }}
                           ></div>
                           <div>
