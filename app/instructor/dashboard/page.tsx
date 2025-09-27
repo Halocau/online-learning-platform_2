@@ -6,24 +6,31 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { 
-  BookOpen, 
-  Users, 
-  DollarSign, 
-  TrendingUp, 
-  Plus, 
-  Eye, 
-  Edit, 
+import {
+  BookOpen,
+  Users,
+  DollarSign,
+  TrendingUp,
+  Plus,
+  Eye,
+  Edit,
   BarChart3,
   LayoutDashboard,
   GraduationCap,
   UserCheck,
-  CreditCard,
   Bell,
   Wallet,
   ChevronRight,
-  Settings
+  Settings,
+  Building2,
+  Trash2,
+  Check
 } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts'
 
 // Custom Sidebar Component
 function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: string, setActiveTab: (tab: string) => void, router: any }) {
@@ -32,7 +39,6 @@ function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: str
     { id: 'courses', label: 'Khóa học', icon: BookOpen },
     { id: 'students', label: 'Học viên', icon: Users },
     { id: 'revenue', label: 'Doanh thu', icon: DollarSign },
-    { id: 'payments', label: 'Thanh toán', icon: CreditCard },
     { id: 'notifications', label: 'Thông báo', icon: Bell },
     { id: 'wallet', label: 'Ví tiền', icon: Wallet },
   ]
@@ -73,11 +79,10 @@ function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: str
                     setActiveTab(item.id)
                   }
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${
-                  activeTab === item.id 
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200' 
-                    : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${activeTab === item.id
+                  ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                  : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 <Icon className="w-5 h-5" />
                 <span className="text-sm font-medium">{item.label}</span>
@@ -98,8 +103,8 @@ function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: str
               className="w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg hover:bg-gray-50 transition-colors"
             >
               <div className="w-8 h-8 rounded overflow-hidden">
-                <img 
-                  src={course.icon} 
+                <img
+                  src={course.icon}
                   alt={course.title}
                   className="w-full h-full object-cover"
                 />
@@ -124,6 +129,50 @@ function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: str
 export default function InstructorDashboardPage() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const router = useRouter()
+  const [showBankModal, setShowBankModal] = useState(false)
+  const [bankAccounts, setBankAccounts] = useState([
+    {
+      id: 1,
+      bankName: 'Vietcombank',
+      accountNumber: '****1234',
+      accountHolder: 'NGUYEN VAN A',
+      isDefault: true
+    },
+    {
+      id: 2,
+      bankName: 'Techcombank',
+      accountNumber: '****5678',
+      accountHolder: 'NGUYEN VAN A',
+      isDefault: false
+    }
+  ])
+  const [newBankAccount, setNewBankAccount] = useState({
+    bankName: '',
+    accountNumber: '',
+    accountHolder: '',
+    isDefault: false
+  })
+
+  // Chart data
+  const monthlyRevenueData = [
+    { month: 'T1', revenue: 8.5, courses: 12 },
+    { month: 'T2', revenue: 9.2, courses: 15 },
+    { month: 'T3', revenue: 11.8, courses: 18 },
+    { month: 'T4', revenue: 10.5, courses: 16 },
+    { month: 'T5', revenue: 13.2, courses: 22 },
+    { month: 'T6', revenue: 14.8, courses: 25 },
+    { month: 'T7', revenue: 16.2, courses: 28 },
+    { month: 'T8', revenue: 15.5, courses: 26 },
+    { month: 'T9', revenue: 15.2, courses: 24 },
+  ]
+
+  const courseRevenueData = [
+    { name: 'React Fundamentals', revenue: 45.2, students: 450, color: '#3B82F6' },
+    { name: 'Advanced JavaScript', revenue: 38.4, students: 320, color: '#EF4444' },
+    { name: 'Node.js Backend', revenue: 28.0, students: 280, color: '#10B981' },
+    { name: 'UI/UX Design', revenue: 24.0, students: 200, color: '#F59E0B' },
+    { name: 'Python Basic', revenue: 18.5, students: 185, color: '#8B5CF6' },
+  ]
 
   // Mock data
   const stats = {
@@ -237,8 +286,8 @@ export default function InstructorDashboardPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     Khóa học của tôi
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="bg-blue-600 hover:bg-blue-700"
                       onClick={() => router.push('/instructor/create-course')}
                     >
@@ -252,8 +301,8 @@ export default function InstructorDashboardPage() {
                     {courses.map((course) => (
                       <div key={course.id} className="flex items-center justify-between p-3 border rounded-lg">
                         <div className="flex items-center space-x-3">
-                          <img 
-                            src={course.thumbnail} 
+                          <img
+                            src={course.thumbnail}
                             alt={course.title}
                             className="w-12 h-12 rounded object-cover"
                           />
@@ -318,7 +367,7 @@ export default function InstructorDashboardPage() {
               <h2 className="text-2xl font-bold">Quản lý học viên</h2>
               <p className="text-gray-600">Danh sách tất cả học viên đã đăng ký khóa học của bạn</p>
             </div>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Danh sách học viên ({students.length})</CardTitle>
@@ -354,40 +403,207 @@ export default function InstructorDashboardPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold">Báo cáo doanh thu</h2>
-              <p className="text-gray-600">Theo dõi doanh thu từ các khóa học</p>
+              <p className="text-gray-600">Theo dõi doanh thu từ các khóa học với biểu đồ trực quan</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Doanh thu tháng này</CardTitle>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium">Doanh thu tháng này</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-green-600">15.2M VNĐ</div>
-                  <p className="text-sm text-gray-600">+12% so với tháng trước</p>
+                  <div className="text-2xl font-bold text-green-600">15.2M VNĐ</div>
+                  <p className="text-xs text-gray-600">+12% so với tháng trước</p>
                 </CardContent>
               </Card>
-              
+
               <Card>
-                <CardHeader>
-                  <CardTitle>Doanh thu năm nay</CardTitle>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium">Doanh thu năm nay</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-blue-600">145M VNĐ</div>
-                  <p className="text-sm text-gray-600">+25% so với năm trước</p>
+                  <div className="text-2xl font-bold text-blue-600">145M VNĐ</div>
+                  <p className="text-xs text-gray-600">+25% so với năm trước</p>
                 </CardContent>
               </Card>
-              
+
               <Card>
-                <CardHeader>
-                  <CardTitle>Trung bình/khóa học</CardTitle>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium">Trung bình/khóa học</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-purple-600">5.6M VNĐ</div>
-                  <p className="text-sm text-gray-600">Từ {stats.totalCourses} khóa học</p>
+                  <div className="text-2xl font-bold text-purple-600">5.6M VNĐ</div>
+                  <p className="text-xs text-gray-600">Từ {stats.totalCourses} khóa học</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium">Tăng trưởng</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-indigo-600">+18%</div>
+                  <p className="text-xs text-gray-600">Trung bình 6 tháng</p>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Charts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Monthly Revenue Trend */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Xu hướng doanh thu theo tháng</CardTitle>
+                  <CardDescription>Doanh thu 9 tháng gần nhất (triệu VNĐ)</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={monthlyRevenueData}>
+                        <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
+                        <XAxis 
+                          dataKey="month" 
+                          className="text-gray-600"
+                          tick={{ fontSize: 12 }}
+                        />
+                        <YAxis 
+                          className="text-gray-600"
+                          tick={{ fontSize: 12 }}
+                        />
+                        <Tooltip 
+                          formatter={(value, name) => [
+                            `${value}M VNĐ`, 
+                            name === 'revenue' ? 'Doanh thu' : 'Khóa học bán'
+                          ]}
+                          labelStyle={{ color: '#374151' }}
+                          contentStyle={{ 
+                            backgroundColor: 'white', 
+                            border: '1px solid #e5e7eb',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="revenue" 
+                          stroke="#3B82F6" 
+                          strokeWidth={3}
+                          dot={{ fill: '#3B82F6', strokeWidth: 2, r: 4 }}
+                          activeDot={{ r: 6, stroke: '#3B82F6', strokeWidth: 2 }}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Course Revenue Distribution */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Doanh thu theo khóa học</CardTitle>
+                  <CardDescription>Top 5 khóa học có doanh thu cao nhất</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={courseRevenueData} layout="horizontal">
+                        <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
+                        <XAxis 
+                          type="number" 
+                          className="text-gray-600"
+                          tick={{ fontSize: 12 }}
+                        />
+                        <YAxis 
+                          type="category" 
+                          dataKey="name" 
+                          className="text-gray-600"
+                          tick={{ fontSize: 10 }}
+                          width={120}
+                        />
+                        <Tooltip 
+                          formatter={(value) => [`${value}M VNĐ`, 'Doanh thu']}
+                          labelStyle={{ color: '#374151' }}
+                          contentStyle={{ 
+                            backgroundColor: 'white', 
+                            border: '1px solid #e5e7eb',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Bar 
+                          dataKey="revenue" 
+                          fill="#10B981" 
+                          radius={[0, 4, 4, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pie Chart for Course Revenue Share */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Phân bố doanh thu theo khóa học</CardTitle>
+                <CardDescription>Tỷ lệ đóng góp doanh thu của từng khóa học</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={courseRevenueData}
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={100}
+                          fill="#8884d8"
+                          dataKey="revenue"
+                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          labelLine={false}
+                        >
+                          {courseRevenueData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip 
+                          formatter={(value) => [`${value}M VNĐ`, 'Doanh thu']}
+                          contentStyle={{ 
+                            backgroundColor: 'white', 
+                            border: '1px solid #e5e7eb',
+                            borderRadius: '8px'
+                          }}
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <h4 className="font-medium text-gray-900 mb-4">Chi tiết theo khóa học:</h4>
+                    {courseRevenueData.map((course, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div 
+                            className="w-4 h-4 rounded" 
+                            style={{ backgroundColor: course.color }}
+                          ></div>
+                          <div>
+                            <p className="font-medium text-sm">{course.name}</p>
+                            <p className="text-xs text-gray-600">{course.students} học viên</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-medium text-sm">{course.revenue}M VNĐ</p>
+                          <p className="text-xs text-gray-600">
+                            {((course.revenue / courseRevenueData.reduce((sum, c) => sum + c.revenue, 0)) * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )
 
@@ -398,7 +614,7 @@ export default function InstructorDashboardPage() {
               <h2 className="text-2xl font-bold">Thông báo</h2>
               <p className="text-gray-600">Theo dõi các hoạt động và thông báo mới</p>
             </div>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Thông báo gần đây</CardTitle>
@@ -432,9 +648,9 @@ export default function InstructorDashboardPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold">Ví tiền</h2>
-              <p className="text-gray-600">Quản lý số dư và giao dịch</p>
+              <p className="text-gray-600">Quản lý số dư, giao dịch và tài khoản ngân hàng</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
@@ -445,7 +661,7 @@ export default function InstructorDashboardPage() {
                   <Button className="mt-4 w-full">Rút tiền</Button>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle>Giao dịch gần đây</CardTitle>
@@ -471,6 +687,164 @@ export default function InstructorDashboardPage() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Bank Account Management */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-5 w-5" />
+                    Tài khoản ngân hàng
+                  </div>
+                  <Dialog open={showBankModal} onOpenChange={setShowBankModal}>
+                    <DialogTrigger asChild>
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                        <Plus className="h-4 w-4 mr-1" />
+                        Thêm tài khoản
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Thêm tài khoản ngân hàng</DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-4">
+                        <div>
+                          <Label htmlFor="bank-name">Ngân hàng *</Label>
+                          <Select
+                            value={newBankAccount.bankName}
+                            onValueChange={(value) => setNewBankAccount(prev => ({ ...prev, bankName: value }))}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Chọn ngân hàng" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Vietcombank">Vietcombank</SelectItem>
+                              <SelectItem value="Techcombank">Techcombank</SelectItem>
+                              <SelectItem value="BIDV">BIDV</SelectItem>
+                              <SelectItem value="VietinBank">VietinBank</SelectItem>
+                              <SelectItem value="Agribank">Agribank</SelectItem>
+                              <SelectItem value="VPBank">VPBank</SelectItem>
+                              <SelectItem value="ACB">ACB</SelectItem>
+                              <SelectItem value="MBBank">MBBank</SelectItem>
+                              <SelectItem value="Sacombank">Sacombank</SelectItem>
+                              <SelectItem value="SHB">SHB</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="account-number">Số tài khoản *</Label>
+                          <Input
+                            id="account-number"
+                            type="text"
+                            placeholder="Nhập số tài khoản"
+                            value={newBankAccount.accountNumber}
+                            onChange={(e) => setNewBankAccount(prev => ({ ...prev, accountNumber: e.target.value }))}
+                          />
+                        </div>
+
+                        <div>
+                          <Label htmlFor="account-holder">Chủ tài khoản *</Label>
+                          <Input
+                            id="account-holder"
+                            type="text"
+                            placeholder="NGUYEN VAN A"
+                            value={newBankAccount.accountHolder}
+                            onChange={(e) => setNewBankAccount(prev => ({ ...prev, accountHolder: e.target.value.toUpperCase() }))}
+                          />
+                          <p className="text-xs text-gray-500 mt-1">Tên phải giống với tên trên tài khoản ngân hàng</p>
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                          <Button
+                            className="flex-1"
+                            onClick={() => {
+                              if (newBankAccount.bankName && newBankAccount.accountNumber && newBankAccount.accountHolder) {
+                                const newAccount = {
+                                  id: Date.now(),
+                                  ...newBankAccount,
+                                  accountNumber: '****' + newBankAccount.accountNumber.slice(-4),
+                                  isDefault: bankAccounts.length === 0
+                                }
+                                setBankAccounts(prev => [...prev, newAccount])
+                                setNewBankAccount({ bankName: '', accountNumber: '', accountHolder: '', isDefault: false })
+                                setShowBankModal(false)
+                              }
+                            }}
+                          >
+                            Thêm tài khoản
+                          </Button>
+                          <Button variant="outline" onClick={() => setShowBankModal(false)}>
+                            Hủy
+                          </Button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {bankAccounts.length > 0 ? (
+                  <div className="space-y-3">
+                    {bankAccounts.map((account) => (
+                      <div key={account.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <Building2 className="h-5 w-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <p className="font-medium">{account.bankName}</p>
+                              {account.isDefault && (
+                                <Badge variant="secondary" className="text-xs">
+                                  Mặc định
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-600">{account.accountNumber}</p>
+                            <p className="text-sm text-gray-500">{account.accountHolder}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {!account.isDefault && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                setBankAccounts(prev => prev.map(acc => ({
+                                  ...acc,
+                                  isDefault: acc.id === account.id
+                                })))
+                              }}
+                            >
+                              <Check className="h-4 w-4 mr-1" />
+                              Đặt mặc định
+                            </Button>
+                          )}
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setBankAccounts(prev => prev.filter(acc => acc.id !== account.id))
+                            }}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <Building2 className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-500 mb-4">Chưa có tài khoản ngân hàng nào</p>
+                    <p className="text-sm text-gray-400">
+                      Thêm tài khoản ngân hàng để nhận thanh toán từ các khóa học của bạn
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
         )
 
