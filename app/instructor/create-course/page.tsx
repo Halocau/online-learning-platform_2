@@ -185,7 +185,7 @@ function CouponForm({
           min="0"
           value={formData.minOrderValue}
           onChange={(e) => setFormData(prev => ({ ...prev, minOrderValue: Number(e.target.value) }))}
-          placeholder="0 = không giới hạn"
+          placeholder="0 = kh�ng gi?i h?n"
         />
       </div>
 
@@ -197,7 +197,7 @@ function CouponForm({
           min="0"
           value={formData.usageLimit}
           onChange={(e) => setFormData(prev => ({ ...prev, usageLimit: Number(e.target.value) }))}
-          placeholder="0 = không giới hạn"
+          placeholder="0 = kh�ng gi?i h?n"
         />
       </div>
 
@@ -758,14 +758,14 @@ export default function CreateCoursePage() {
                 <div className="flex items-center gap-3 mb-4">
                   <Checkbox checked={activeTab === "curriculum"} />
                   <span className={`text-base font-medium ${activeTab === "curriculum" ? "text-purple-700" : "text-gray-900"
-                    }`}>Chương trình giảng dạy</span>
+                    }`}>Ch��ng tr?nh gi?ng d?y</span>
                 </div>
                 <div className="pl-7">
                   <p className="text-sm text-gray-600 mb-2">
-                    {course.sections.length} chương • {course.sections.reduce((total, section) => total + section.lectures.length, 0)} bài học
+                    {course.sections.length} ch��ng � {course.sections.reduce((total, section) => total + section.lectures.length, 0)} b�i h?c
                   </p>
                   <p className="text-xs text-gray-500">
-                    Tổng thời lượng: {course.sections.reduce((total, section) =>
+                    T?ng th?i l�?ng: {course.sections.reduce((total, section) =>
                       total + section.lectures.reduce((sectionTotal, lecture) =>
                         sectionTotal + (lecture.duration || 0), 0), 0)}min
                   </p>
@@ -781,14 +781,14 @@ export default function CreateCoursePage() {
                 <div className="flex items-center gap-3 mb-4">
                   <Checkbox checked={activeTab === "coupons"} />
                   <span className={`text-base font-medium ${activeTab === "coupons" ? "text-purple-700" : "text-gray-900"
-                    }`}>Mã giảm giá</span>
+                    }`}>M? gi?m gi�</span>
                 </div>
                 <div className="pl-7">
                   <p className="text-sm text-gray-600 mb-2">
-                    {course.coupons?.length || 0} mã giảm giá đã tạo
+                    {course.coupons?.length || 0} m? gi?m gi� �? t?o
                   </p>
                   <p className="text-xs text-gray-500">
-                    Tạo mã giảm giá để thu hút học viên đăng ký khóa học
+                    T?o m? gi?m gi� �? thu h�t h?c vi�n ��ng k? kh�a h?c
                   </p>
                 </div>
               </div>
@@ -957,7 +957,7 @@ export default function CreateCoursePage() {
                 /* Coupon Management */
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold text-gray-900">Quản lý mã giảm giá</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Qu?n l? m? gi?m gi�</h2>
                     <Button
                       onClick={() => {
                         setEditingCoupon(null)
@@ -966,7 +966,7 @@ export default function CreateCoursePage() {
                       className="bg-purple-600 hover:bg-purple-700"
                     >
                       <Plus className="w-4 h-4 mr-2" />
-                      Tạo mã giảm giá
+                      T?o m? gi?m gi�
                     </Button>
                   </div>
 
@@ -982,17 +982,17 @@ export default function CreateCoursePage() {
                                     {coupon.code}
                                   </code>
                                   <Badge variant={coupon.isActive ? "default" : "secondary"}>
-                                    {coupon.isActive ? "Đang hoạt động" : "Ngừng hoạt động"}
+                                    {coupon.isActive ? "�ang ho?t �?ng" : "Ng?ng ho?t �?ng"}
                                   </Badge>
                                 </div>
-                                <p className="text-gray-600 mb-2">{coupon.description || "Không có mô tả"}</p>
+                                <p className="text-gray-600 mb-2">{coupon.description || "Kh�ng c� m� t?"}</p>
                                 <div className="flex items-center gap-4 text-sm text-gray-500">
                                   <span>
-                                    Giảm: {coupon.type === "percentage" ? `${coupon.value}%` : `$${coupon.value}`}
-                                    {coupon.maxDiscount && coupon.type === "percentage" && ` (tối đa $${coupon.maxDiscount})`}
+                                    Gi?m: {coupon.type === "percentage" ? `${coupon.value}%` : `$${coupon.value}`}
+                                    {coupon.maxDiscount && coupon.type === "percentage" && ` (t?i �a $${coupon.maxDiscount})`}
                                   </span>
-                                  <span>Đã dùng: {coupon.usedCount}/{coupon.usageLimit || "∞"}</span>
-                                  <span>Từ {new Date(coupon.validFrom).toLocaleDateString()} đến {new Date(coupon.validTo).toLocaleDateString()}</span>
+                                  <span>�? d�ng: {coupon.usedCount}/{coupon.usageLimit || "?"}</span>
+                                  <span>T? {new Date(coupon.validFrom).toLocaleDateString()} �?n {new Date(coupon.validTo).toLocaleDateString()}</span>
                                 </div>
                               </div>
                               <div className="flex items-center gap-2">
@@ -1004,7 +1004,7 @@ export default function CreateCoursePage() {
                                     setShowCouponModal(true)
                                   }}
                                 >
-                                  Chỉnh sửa
+                                  Ch?nh s?a
                                 </Button>
                                 <Button
                                   variant="outline"
@@ -1015,8 +1015,8 @@ export default function CreateCoursePage() {
                                       coupons: prev.coupons?.filter(c => c.id !== coupon.id) || []
                                     }))
                                     toast({
-                                      title: "Đã xóa mã giảm giá",
-                                      description: `Mã ${coupon.code} đã được xóa`,
+                                      title: "�? x�a m? gi?m gi�",
+                                      description: `M? ${coupon.code} �? ��?c x�a`,
                                     })
                                   }}
                                 >
@@ -1031,11 +1031,11 @@ export default function CreateCoursePage() {
                   ) : (
                     <Card className="border-2 border-dashed border-gray-300 bg-gray-50">
                       <CardContent className="flex flex-col items-center justify-center py-12">
-                        <div className="text-4xl mb-4">🎫</div>
-                        <h3 className="text-lg font-medium text-gray-900 mb-2">Chưa có mã giảm giá nào</h3>
+                        <div className="text-4xl mb-4">??</div>
+                        <h3 className="text-lg font-medium text-gray-900 mb-2">Ch�a c� m? gi?m gi� n�o</h3>
                         <p className="text-gray-600 text-center mb-4">
-                          Tạo mã giảm giá để thu hút học viên đăng ký khóa học của bạn.<br />
-                          Bạn có thể tạo mã giảm theo phần trăm hoặc số tiền cố định.
+                          T?o m? gi?m gi� �? thu h�t h?c vi�n ��ng k? kh�a h?c c?a b?n.<br />
+                          B?n c� th? t?o m? gi?m theo ph?n tr�m ho?c s? ti?n c? �?nh.
                         </p>
                         <Button
                           onClick={() => {
@@ -1045,7 +1045,7 @@ export default function CreateCoursePage() {
                           className="bg-purple-600 hover:bg-purple-700"
                         >
                           <Plus className="w-4 h-4 mr-2" />
-                          Tạo mã giảm giá đầu tiên
+                          T?o m? gi?m gi� �?u ti�n
                         </Button>
                       </CardContent>
                     </Card>
@@ -1218,7 +1218,7 @@ export default function CreateCoursePage() {
               {/* Quiz Title */}
               <div>
                 <Input
-                  placeholder="học bài"
+                  placeholder="h?c b�i"
                   value={currentQuiz?.title || ""}
                   onChange={(e) => setCurrentQuiz(prev => prev ? { ...prev, title: e.target.value } : null)}
                   className="text-lg font-medium"
@@ -1237,7 +1237,7 @@ export default function CreateCoursePage() {
                   </Button>
                 </div>
                 <Textarea
-                  placeholder="học bài"
+                  placeholder="h?c b�i"
                   value={currentQuiz?.description || ""}
                   onChange={(e) => setCurrentQuiz(prev => prev ? { ...prev, description: e.target.value } : null)}
                   className="border-none resize-none min-h-[100px]"
@@ -1314,7 +1314,7 @@ export default function CreateCoursePage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <HelpCircle className="h-5 w-5" />
-                  <span>Quiz 1: học bài</span>
+                  <span>Quiz 1: h?c b�i</span>
                   <Button variant="ghost" size="sm">
                     <Settings className="h-4 w-4" />
                   </Button>
@@ -1474,7 +1474,7 @@ export default function CreateCoursePage() {
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {editingCoupon ? "Chỉnh sửa mã giảm giá" : "Tạo mã giảm giá mới"}
+                {editingCoupon ? "Ch?nh s?a m? gi?m gi�" : "T?o m? gi?m gi� m?i"}
               </DialogTitle>
             </DialogHeader>
             <CouponForm
@@ -1489,8 +1489,8 @@ export default function CreateCoursePage() {
                     ) || []
                   }))
                   toast({
-                    title: "Đã cập nhật mã giảm giá",
-                    description: `Mã ${couponData.code} đã được cập nhật`,
+                    title: "�? c?p nh?t m? gi?m gi�",
+                    description: `M? ${couponData.code} �? ��?c c?p nh?t`,
                   })
                 } else {
                   // Add new coupon
@@ -1504,8 +1504,8 @@ export default function CreateCoursePage() {
                     coupons: [...(prev.coupons || []), newCoupon]
                   }))
                   toast({
-                    title: "Đã tạo mã giảm giá",
-                    description: `Mã ${couponData.code} đã được tạo thành công`,
+                    title: "�? t?o m? gi?m gi�",
+                    description: `M? ${couponData.code} �? ��?c t?o th�nh c�ng`,
                   })
                 }
                 setShowCouponModal(false)
@@ -1544,7 +1544,7 @@ export default function CreateCoursePage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="title">Tên khóa học *</Label>
+            <Label htmlFor="title">T�n kh�a h?c *</Label>
             <Input
               id="title"
               placeholder="Nhập tên khóa học"
@@ -1554,7 +1554,7 @@ export default function CreateCoursePage() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Mô tả khóa học *</Label>
+            <Label htmlFor="description">M� t? kh�a h?c *</Label>
             <Textarea
               id="description"
               placeholder="Mô tả về khóa học của bạn..."
@@ -1566,41 +1566,41 @@ export default function CreateCoursePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="category">Danh mục *</Label>
+              <Label htmlFor="category">Danh m?c *</Label>
               <Select value={course.category} onValueChange={(value) => setCourse({ ...course, category: value })}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Chọn danh mục" />
+                  <SelectValue placeholder="Ch?n danh m?c" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="programming">Lập trình</SelectItem>
-                  <SelectItem value="design">Thiết kế</SelectItem>
+                  <SelectItem value="programming">L?p tr?nh</SelectItem>
+                  <SelectItem value="design">Thi?t k?</SelectItem>
                   <SelectItem value="business">Kinh doanh</SelectItem>
                   <SelectItem value="marketing">Marketing</SelectItem>
-                  <SelectItem value="language">Ngôn ngữ</SelectItem>
-                  <SelectItem value="music">Âm nhạc</SelectItem>
-                  <SelectItem value="health">Sức khỏe</SelectItem>
-                  <SelectItem value="photography">Nhiếp ảnh</SelectItem>
+                  <SelectItem value="language">Ng�n ng?</SelectItem>
+                  <SelectItem value="music">�m nh?c</SelectItem>
+                  <SelectItem value="health">S?c kh?e</SelectItem>
+                  <SelectItem value="photography">Nhi?p ?nh</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="level">Cấp độ *</Label>
+              <Label htmlFor="level">C?p �? *</Label>
               <Select value={course.level} onValueChange={(value) => setCourse({ ...course, level: value })}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Chọn cấp độ" />
+                  <SelectValue placeholder="Ch?n c?p �?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="beginner">Người mới bắt đầu</SelectItem>
-                  <SelectItem value="intermediate">Trung cấp</SelectItem>
-                  <SelectItem value="advanced">Nâng cao</SelectItem>
+                  <SelectItem value="beginner">Ng�?i m?i b?t �?u</SelectItem>
+                  <SelectItem value="intermediate">Trung c?p</SelectItem>
+                  <SelectItem value="advanced">N�ng cao</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="price">Giá khóa học (VNĐ)</Label>
+            <Label htmlFor="price">Gi� kh�a h?c (VN�)</Label>
             <Input
               id="price"
               type="number"
@@ -1611,7 +1611,7 @@ export default function CreateCoursePage() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="thumbnail">Hình thu nhỏ khóa học</Label>
+            <Label htmlFor="thumbnail">H?nh thu nh? kh�a h?c</Label>
             <div className="flex items-center gap-4">
               {course.thumbnail && (
                 <div className="relative w-32 h-20 rounded-lg overflow-hidden bg-gray-100 group">
@@ -1623,8 +1623,8 @@ export default function CreateCoursePage() {
                     onClick={() => {
                       setCourse(prev => ({ ...prev, thumbnail: "" }))
                       toast({
-                        title: "Đã xóa hình ảnh",
-                        description: "Hình thu nhỏ đã được xóa",
+                        title: "�? x�a h?nh ?nh",
+                        description: "H?nh thu nh? �? ��?c x�a",
                       })
                     }}
                   >
@@ -1647,15 +1647,15 @@ export default function CreateCoursePage() {
                   disabled={isUploadingImage}
                 >
                   <Upload className="w-4 h-4 mr-2" />
-                  {isUploadingImage ? "Đang tải..." : course.thumbnail ? "Thay đổi hình" : "Tải lên hình"}
+                  {isUploadingImage ? "�ang t?i..." : course.thumbnail ? "Thay �?i h?nh" : "T?i l�n h?nh"}
                 </Button>
                 {isUploadingImage && (
                   <div className="text-xs text-gray-500">
-                    Đang xử lý hình ảnh...
+                    �ang x? l? h?nh ?nh...
                   </div>
                 )}
                 <div className="text-xs text-gray-400">
-                  Hỗ trợ: JPG, PNG, GIF, WebP. Tối đa 5MB
+                  H? tr?: JPG, PNG, GIF, WebP. T?i �a 5MB
                 </div>
               </div>
             </div>
@@ -1664,16 +1664,16 @@ export default function CreateCoursePage() {
           <div className="flex gap-4 pt-4">
             <Button onClick={handleSaveCourse} disabled={isLoading} className="flex-1">
               {isLoading ? (
-                "Đang lưu..."
+                "�ang l�u..."
               ) : (
                 <>
                   <Check className="w-4 h-4 mr-2" />
-                  Lưu khóa học
+                  L�u kh�a h?c
                 </>
               )}
             </Button>
             <Button variant="outline" onClick={handleCreateNew}>
-              Tạo mới
+              T?o m?i
             </Button>
           </div>
         </CardContent>
@@ -1681,3 +1681,4 @@ export default function CreateCoursePage() {
     </div>
   )
 }
+

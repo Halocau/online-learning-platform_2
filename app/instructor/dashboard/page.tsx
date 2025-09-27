@@ -57,7 +57,7 @@ function InstructorSidebar({ activeTab, setActiveTab, router }: { activeTab: str
             <GraduationCap className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="font-semibold text-gray-900">EduPlatform</h2>
+            <h2 className="font-semibold text-gray-900">SkillUp</h2>
             <p className="text-sm text-gray-500">Giảng viên</p>
           </div>
         </div>

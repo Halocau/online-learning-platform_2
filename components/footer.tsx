@@ -15,7 +15,7 @@ export function Footer() {
                             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
                                 <BookOpen className="h-4 w-4 text-primary-foreground" />
                             </div>
-                            <span className="text-xl font-bold">EduPlatform</span>
+                            <span className="text-xl font-bold">SkillUp</span>
                         </div>
                         <p className="text-gray-300 text-sm leading-relaxed">
                             Nền tảng học trực tuyến hàng đầu Việt Nam, cung cấp các khóa học chất lượng cao từ các chuyên gia trong ngành.
@@ -106,7 +106,7 @@ export function Footer() {
                         <ul className="space-y-3 text-sm">
                             <li className="flex items-center space-x-2">
                                 <Mail className="h-4 w-4 text-gray-400" />
-                                <span className="text-gray-300">info@eduplatform.vn</span>
+                                <span className="text-gray-300">info@skillup.vn</span>
                             </li>
                             <li className="flex items-center space-x-2">
                                 <Phone className="h-4 w-4 text-gray-400" />
@@ -127,7 +127,7 @@ export function Footer() {
                 <div className="border-t border-gray-800 mt-8 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <p className="text-gray-400 text-sm">
-                            © 2024 EduPlatform. Tất cả quyền được bảo lưu.
+                            © 2024 SkillUp. Tất cả quyền được bảo lưu.
                         </p>
                         <div className="flex space-x-6 text-sm">
                             <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">

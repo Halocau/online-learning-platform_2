@@ -162,7 +162,7 @@ export default function ModeratorDashboard() {
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-primary" />
               <Link href="/" className="text-2xl font-bold text-foreground">
-                EduPlatform Moderator
+                SkillUp Moderator
               </Link>
             </div>
             <div className="flex items-center space-x-4">

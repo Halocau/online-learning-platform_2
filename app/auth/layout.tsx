@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Xác thực - EduPlatform',
-    description: 'Đăng nhập hoặc đăng ký tài khoản EduPlatform',
+    title: 'Xác thực - SkillUp',
+    description: 'Đăng nhập hoặc đăng ký tài khoản SkillUp',
 }
 
 export default function AuthLayout({
@@ -31,7 +31,7 @@ export default function AuthLayout({
                                 />
                             </svg>
                         </div>
-                        <span className="text-xl font-bold text-foreground">EduPlatform</span>
+                        <span className="text-xl font-bold text-foreground">SkillUp</span>
                     </div>
 
                     <nav className="hidden md:flex items-center space-x-6">
@@ -60,7 +60,7 @@ export default function AuthLayout({
             <footer className="absolute bottom-0 left-0 right-0 p-4">
                 <div className="container mx-auto text-center">
                     <p className="text-xs text-muted-foreground">
-                        © 2024 EduPlatform. Tất cả quyền được bảo lưu.
+                        © 2024 SkillUp. Tất cả quyền được bảo lưu.
                     </p>
                 </div>
             </footer>

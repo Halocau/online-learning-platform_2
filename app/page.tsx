@@ -238,7 +238,7 @@ export default function HomePage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4">Tại sao chọn EduPlatform?</h3>
+            <h3 className="text-3xl font-bold mb-4">Tại sao chọn SkillUp?</h3>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Chúng tôi cung cấp trải nghiệm học tập tốt nhất với công nghệ hiện đại
             </p>
@@ -318,7 +318,7 @@ export default function HomePage() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <BookOpen className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold">EduPlatform</span>
+                <span className="text-xl font-bold">SkillUp</span>
               </div>
               <p className="text-muted-foreground">
                 Nền tảng học trực tuyến hàng đầu Việt Nam, mang đến trải nghiệm học tập tốt nhất.
@@ -405,7 +405,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 EduPlatform. Tất cả quyền được bảo lưu.</p>
+            <p>&copy; 2025 SkillUp. Tất cả quyền được bảo lưu.</p>
           </div>
         </div>
       </footer>

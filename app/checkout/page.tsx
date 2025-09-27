@@ -61,7 +61,7 @@ export default function CheckoutPage() {
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-primary" />
               <Link href="/" className="text-2xl font-bold text-foreground">
-                EduPlatform
+                SkillUp
               </Link>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-primary" />
               <Link href="/" className="text-2xl font-bold text-foreground">
-                EduPlatform
+                SkillUp
               </Link>
             </div>
             <div className="flex items-center gap-2">
@@ -279,7 +279,7 @@ export default function CheckoutPage() {
                             <strong>Số tài khoản:</strong> 1234567890
                           </p>
                           <p>
-                            <strong>Chủ tài khoản:</strong> CONG TY EDUPLATFORM
+                            <strong>Chủ tài khoản:</strong> CONG TY SkillUp
                           </p>
                           <p>
                             <strong>Nội dung:</strong> Thanh toan khoa hoc [Email của bạn]

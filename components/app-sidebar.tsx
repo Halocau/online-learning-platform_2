@@ -39,7 +39,7 @@ const guestData = {
   },
   teams: [
     {
-      name: "EduPlatform",
+      name: "SkillUp",
       logo: GalleryVerticalEnd,
       plan: "Khách",
     },
@@ -65,21 +65,6 @@ const guestData = {
         },
       ],
     },
-    {
-      title: "Giỏ hàng",
-      url: "/cart",
-      icon: ShoppingCart,
-    },
-    {
-      title: "Diễn đàn",
-      url: "/forum",
-      icon: MessageSquare,
-    },
-    {
-      title: "Hỗ trợ AI",
-      url: "/chatbot",
-      icon: Bot,
-    },
   ],
   projects: [],
 }
@@ -92,7 +77,7 @@ const customerData = {
   },
   teams: [
     {
-      name: "EduPlatform",
+      name: "SkillUp",
       logo: GalleryVerticalEnd,
       plan: "Học viên",
     },
@@ -116,51 +101,7 @@ const customerData = {
           title: "Đã hoàn thành",
           url: "/my-courses/completed",
         },
-        {
-          title: "Yêu thích",
-          url: "/my-courses/favorites",
-        },
       ],
-    },
-    {
-      title: "Khám phá",
-      url: "/courses",
-      icon: Map,
-      items: [
-        {
-          title: "Tất cả khóa học",
-          url: "/courses",
-        },
-        {
-          title: "Tìm kiếm",
-          url: "/courses/search",
-        },
-      ],
-    },
-    {
-      title: "Giỏ hàng",
-      url: "/cart",
-      icon: ShoppingCart,
-    },
-    {
-      title: "Thanh toán",
-      url: "/payment",
-      icon: CreditCard,
-    },
-    {
-      title: "Diễn đàn",
-      url: "/forum",
-      icon: MessageSquare,
-    },
-    {
-      title: "Hỗ trợ",
-      url: "/support",
-      icon: HelpCircle,
-    },
-    {
-      title: "Hỗ trợ AI",
-      url: "/chatbot",
-      icon: Bot,
     },
     {
       title: "Thông báo",
@@ -195,7 +136,7 @@ const instructorData = {
   },
   teams: [
     {
-      name: "EduPlatform",
+      name: "SkillUp",
       logo: GalleryVerticalEnd,
       plan: "Giảng viên",
     },
@@ -240,11 +181,6 @@ const instructorData = {
       icon: TrendingUp,
     },
     {
-      title: "Thanh toán",
-      url: "/instructor/payments",
-      icon: CreditCard,
-    },
-    {
       title: "Thông báo",
       url: "/notifications",
       icon: Bell,
@@ -277,7 +213,7 @@ const moderatorData = {
   },
   teams: [
     {
-      name: "EduPlatform",
+      name: "SkillUp",
       logo: GalleryVerticalEnd,
       plan: "Moderator",
     },
@@ -351,7 +287,7 @@ const adminData = {
   },
   teams: [
     {
-      name: "EduPlatform",
+      name: "SkillUp",
       logo: GalleryVerticalEnd,
       plan: "Admin",
     },

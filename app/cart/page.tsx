@@ -18,6 +18,13 @@ export default function CartPage() {
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [paymentStatus, setPaymentStatus] = useState<'pending' | 'success' | 'failed'>('pending')
 
+  // Mock user data - in real app this would come from authentication context
+  const currentUser = {
+    name: "Nguyễn Văn A",
+    email: "nguyenvana@email.com",
+    avatar: "/placeholder-user.jpg"
+  }
+
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -119,7 +126,7 @@ export default function CartPage() {
     amount: total,
     qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", // Placeholder QR code
     bankInfo: {
-      accountName: "EDUPLATFORM VIETNAM",
+      accountName: "SkillUp VIETNAM",
       accountNumber: "1234567890",
       bankName: "Vietcombank",
       branch: "Chi nhánh Đống Đa",
@@ -152,7 +159,7 @@ export default function CartPage() {
   if (cartItems.length === 0) {
     return (
       <>
-        <Header />
+        <Header user={currentUser} />
         <div className="container mx-auto py-8 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <ShoppingCart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -175,7 +182,7 @@ export default function CartPage() {
 
   return (
     <>
-      <Header />
+      <Header user={currentUser} />
       <div className="container mx-auto py-8 px-4 max-w-6xl">
         <div className="flex items-center gap-3 mb-8">
           <ShoppingCart className="w-8 h-8 text-blue-600" />

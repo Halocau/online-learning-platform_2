@@ -4,8 +4,16 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from '@/components/mode-toggle'
-import { BookOpen, Menu, X, Bell, ShoppingCart } from 'lucide-react'
+import { BookOpen, Menu, X, Bell, ShoppingCart, User, LogOut, Settings } from 'lucide-react'
 import { useState } from 'react'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 interface HeaderProps {
     user?: {
@@ -26,7 +34,7 @@ export function Header({ user }: HeaderProps) {
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
                         <BookOpen className="h-4 w-4 text-primary-foreground" />
                     </div>
-                    <span className="hidden font-bold sm:inline-block">EduPlatform</span>
+                    <span className="hidden font-bold sm:inline-block">SkillUp</span>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -88,16 +96,53 @@ export function Header({ user }: HeaderProps) {
                     {/* Authentication Buttons */}
                     {user ? (
                         <div className="flex items-center space-x-2">
-                            <Link href="/dashboard">
-                                <Button variant="ghost" size="sm">
-                                    Dashboard
-                                </Button>
-                            </Link>
-                            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-                                <span className="text-primary-foreground text-sm font-medium">
-                                    {user.name.charAt(0).toUpperCase()}
-                                </span>
-                            </div>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
+                                        <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:bg-primary/90 transition-colors">
+                                            <span className="text-primary-foreground text-sm font-medium">
+                                                {user.name.charAt(0).toUpperCase()}
+                                            </span>
+                                        </div>
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56" align="end" forceMount>
+                                    <DropdownMenuLabel className="font-normal">
+                                        <div className="flex flex-col space-y-1">
+                                            <p className="text-sm font-medium leading-none">{user.name}</p>
+                                            <p className="text-xs leading-none text-muted-foreground">
+                                                {user.email}
+                                            </p>
+                                        </div>
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile" className="cursor-pointer">
+                                            <User className="mr-2 h-4 w-4" />
+                                            Hồ sơ cá nhân
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/dashboard" className="cursor-pointer">
+                                            <Settings className="mr-2 h-4 w-4" />
+                                            Dashboard
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem 
+                                        className="cursor-pointer text-red-600 focus:text-red-600"
+                                        onClick={() => {
+                                            // Logout logic here
+                                            localStorage.removeItem('user')
+                                            sessionStorage.removeItem('user')
+                                            window.location.href = '/'
+                                        }}
+                                    >
+                                        <LogOut className="mr-2 h-4 w-4" />
+                                        Đăng xuất
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
                     ) : (
                         <div className="hidden md:flex items-center space-x-2">

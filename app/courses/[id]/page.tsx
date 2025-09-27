@@ -144,7 +144,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-primary" />
               <Link href="/" className="text-2xl font-bold text-foreground">
-                EduPlatform
+                SkillUp
               </Link>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
@@ -228,15 +228,19 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   </div>
 
                   <div className="space-y-3 mb-6">
+                    <Link href={`/courses/${course.id}/lesson/1`}>
+                      <Button className="w-full">
+                        <Play className="h-4 w-4 mr-2" />
+                        Bắt đầu học
+                      </Button>
+                    </Link>
                     <AddToCartButton
                       courseId={course.id}
                       courseTitle={course.title}
                       price={course.price}
                       className="w-full"
+                      variant="outline"
                     />
-                    <Button variant="outline" className="w-full bg-transparent">
-                      Mua ngay
-                    </Button>
                   </div>
 
                   <div className="text-center text-sm text-muted-foreground mb-4">Hoàn tiền 100% trong 30 ngày</div>
@@ -334,6 +338,20 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                               <span className="text-xs text-muted-foreground">{item.duration}</span>
                             </div>
                           ))}
+                          
+                          {/* Quiz section for certain chapters */}
+                          {index === 2 && (
+                            <Link href={`/courses/${course.id}/quiz/1`}>
+                              <div className="flex items-center justify-between py-2 px-4 hover:bg-yellow-50 rounded border border-yellow-200 bg-yellow-50">
+                                <div className="flex items-center gap-2">
+                                  <BookOpen className="h-4 w-4 text-yellow-600" />
+                                  <span className="text-sm font-medium text-yellow-800">📝 Kiểm tra React Basics</span>
+                                </div>
+                                <span className="text-xs text-yellow-600">Quiz</span>
+                              </div>
+                            </Link>
+                          )}
+                          
                           {section.items.length > 3 && (
                             <div className="text-center py-2">
                               <Button variant="ghost" size="sm">
