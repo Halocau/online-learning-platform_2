@@ -175,8 +175,8 @@ export default function CompletedCoursesPage() {
                   <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="flex flex-col lg:flex-row">
                       <div className="lg:w-48 h-32 lg:h-auto relative">
-                        <img 
-                          src={course.thumbnail} 
+                        <img
+                          src={course.thumbnail}
                           alt={course.title}
                           className="w-full h-full object-cover"
                         />

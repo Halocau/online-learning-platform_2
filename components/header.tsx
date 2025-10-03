@@ -129,7 +129,7 @@ export function Header({ user }: HeaderProps) {
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem 
+                                    <DropdownMenuItem
                                         className="cursor-pointer text-red-600 focus:text-red-600"
                                         onClick={() => {
                                             // Logout logic here

@@ -123,10 +123,10 @@ export default function QuizResultsPage() {
   const params = useParams()
   const router = useRouter()
   const searchParams = useSearchParams()
-  
+
   const quizId = params.quizId as string
   const courseId = params.id as string
-  
+
   const [results, setResults] = useState<QuestionResult[]>([])
   const [totalScore, setTotalScore] = useState(0)
   const [maxScore, setMaxScore] = useState(0)
@@ -142,7 +142,7 @@ export default function QuizResultsPage() {
 
     try {
       const userAnswers: Answer[] = JSON.parse(decodeURIComponent(answersParam))
-      
+
       let score = 0
       let maxPossibleScore = 0
       const questionResults: QuestionResult[] = []
@@ -168,11 +168,11 @@ export default function QuizResultsPage() {
           case 'multiple-select':
             const userSelections = userAnswer?.answer || []
             const correctSelections = (question as any).correctAnswers || []
-            
+
             // Check if arrays are equal
             const isExactMatch = userSelections.length === correctSelections.length &&
               userSelections.every((val: number) => correctSelections.includes(val))
-            
+
             isCorrect = isExactMatch
             earnedPoints = isCorrect ? question.points : 0
             break
@@ -234,17 +234,17 @@ export default function QuizResultsPage() {
     switch (question.type) {
       case 'multiple-choice':
         return question.options?.[answer] || 'Không trả lời'
-      
+
       case 'true-false':
         return answer === true ? 'Đúng' : answer === false ? 'Sai' : 'Không trả lời'
-      
+
       case 'multiple-select':
         if (!answer || answer.length === 0) return 'Không trả lời'
         return answer.map((index: number) => question.options?.[index]).join(', ')
-      
+
       case 'essay':
         return answer || 'Không trả lời'
-      
+
       default:
         return 'Không trả lời'
     }
@@ -254,16 +254,16 @@ export default function QuizResultsPage() {
     switch (question.type) {
       case 'multiple-choice':
         return question.options?.[question.correctAnswer]
-      
+
       case 'true-false':
         return question.correctAnswer ? 'Đúng' : 'Sai'
-      
+
       case 'multiple-select':
         return (question as any).correctAnswers?.map((index: number) => question.options?.[index]).join(', ')
-      
+
       case 'essay':
         return 'Câu trả lời tự luận (cần chấm thủ công)'
-      
+
       default:
         return 'N/A'
     }
@@ -350,7 +350,7 @@ export default function QuizResultsPage() {
                     {formatAnswer(result.question, result.userAnswer)}
                   </p>
                 </div>
-                
+
                 {!result.isCorrect && result.question.type !== 'essay' && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground mb-1">

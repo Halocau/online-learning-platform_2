@@ -338,7 +338,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                               <span className="text-xs text-muted-foreground">{item.duration}</span>
                             </div>
                           ))}
-                          
+
                           {/* Quiz section for certain chapters */}
                           {index === 2 && (
                             <Link href={`/courses/${course.id}/quiz/1`}>
@@ -351,7 +351,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                               </div>
                             </Link>
                           )}
-                          
+
                           {section.items.length > 3 && (
                             <div className="text-center py-2">
                               <Button variant="ghost" size="sm">

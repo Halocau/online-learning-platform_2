@@ -64,7 +64,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
       totalLessons: 18
     }
   }
-  
+
   const course = courseData[parseInt(params.id) as keyof typeof courseData] || courseData[1]
 
   return (
@@ -76,7 +76,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
             <Badge variant="secondary" className="mb-2">{course.category}</Badge>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.title}</h1>
             <p className="text-lg text-gray-600 mb-6">{course.description}</p>
-            
+
             <div className="flex justify-center items-center gap-6 mb-6">
               <div className="flex items-center gap-2">
                 <div className="flex items-center">
@@ -96,9 +96,9 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
                 <span className="text-gray-600">{course.totalLessons} bài học</span>
               </div>
             </div>
-            
+
             <img src={course.thumbnail} alt={course.title} className="w-full max-w-2xl mx-auto h-64 object-cover rounded-lg shadow-lg mb-8" />
-            
+
             <Card className="max-w-md mx-auto">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">

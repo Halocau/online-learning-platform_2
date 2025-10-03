@@ -106,15 +106,15 @@ export default function NotificationsPage() {
   const unreadCount = notificationList.filter(notif => !notif.read).length
 
   const markAsRead = (id: number) => {
-    setNotificationList(prev => 
-      prev.map(notif => 
+    setNotificationList(prev =>
+      prev.map(notif =>
         notif.id === id ? { ...notif, read: true } : notif
       )
     )
   }
 
   const markAllAsRead = () => {
-    setNotificationList(prev => 
+    setNotificationList(prev =>
       prev.map(notif => ({ ...notif, read: true }))
     )
   }
@@ -203,11 +203,10 @@ export default function NotificationsPage() {
                 {notificationList.map((notification) => {
                   const IconComponent = notification.icon
                   return (
-                    <Card 
-                      key={notification.id} 
-                      className={`transition-all hover:shadow-md ${
-                        !notification.read ? 'border-l-4 border-l-blue-500 bg-blue-50/30' : ''
-                      }`}
+                    <Card
+                      key={notification.id}
+                      className={`transition-all hover:shadow-md ${!notification.read ? 'border-l-4 border-l-blue-500 bg-blue-50/30' : ''
+                        }`}
                     >
                       <CardContent className="p-4">
                         <div className="flex items-start gap-4">

@@ -92,7 +92,7 @@ const transactions = [
 
 export default function WalletPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("month")
-  
+
   const currentBalance = 1450000
   const totalIncome = transactions.filter(t => t.type === "income").reduce((sum, t) => sum + t.amount, 0)
   const totalExpense = Math.abs(transactions.filter(t => t.type === "expense").reduce((sum, t) => sum + t.amount, 0))
@@ -223,22 +223,22 @@ export default function WalletPage() {
                   <p className="text-gray-600 mt-2">Theo dõi tất cả các giao dịch của bạn</p>
                 </div>
                 <div className="flex gap-2">
-                  <Button 
-                    variant={selectedPeriod === "week" ? "default" : "outline"} 
+                  <Button
+                    variant={selectedPeriod === "week" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedPeriod("week")}
                   >
                     Tuần này
                   </Button>
-                  <Button 
-                    variant={selectedPeriod === "month" ? "default" : "outline"} 
+                  <Button
+                    variant={selectedPeriod === "month" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedPeriod("month")}
                   >
                     Tháng này
                   </Button>
-                  <Button 
-                    variant={selectedPeriod === "year" ? "default" : "outline"} 
+                  <Button
+                    variant={selectedPeriod === "year" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedPeriod("year")}
                   >
@@ -251,19 +251,17 @@ export default function WalletPage() {
                 {transactions.map((transaction) => {
                   const IconComponent = getTransactionIcon(transaction.type, transaction.category)
                   const isIncome = transaction.type === "income"
-                  
+
                   return (
                     <Card key={transaction.id} className="hover:shadow-md transition-shadow">
                       <CardContent className="p-4">
                         <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-full ${
-                            isIncome ? 'bg-green-50' : 'bg-red-50'
-                          }`}>
-                            <IconComponent className={`w-5 h-5 ${
-                              isIncome ? 'text-green-600' : 'text-red-600'
-                            }`} />
+                          <div className={`p-3 rounded-full ${isIncome ? 'bg-green-50' : 'bg-red-50'
+                            }`}>
+                            <IconComponent className={`w-5 h-5 ${isIncome ? 'text-green-600' : 'text-red-600'
+                              }`} />
                           </div>
-                          
+
                           <div className="flex-1">
                             <h3 className="font-semibold text-gray-900">
                               {transaction.title}
@@ -276,14 +274,13 @@ export default function WalletPage() {
                               <span>{transaction.method}</span>
                             </div>
                           </div>
-                          
+
                           <div className="text-right">
-                            <p className={`text-lg font-bold ${
-                              isIncome ? 'text-green-600' : 'text-red-600'
-                            }`}>
+                            <p className={`text-lg font-bold ${isIncome ? 'text-green-600' : 'text-red-600'
+                              }`}>
                               {isIncome ? '+' : ''}{formatCurrency(transaction.amount)}
                             </p>
-                            <Badge 
+                            <Badge
                               variant={transaction.status === 'completed' ? 'default' : 'secondary'}
                               className="text-xs"
                             >

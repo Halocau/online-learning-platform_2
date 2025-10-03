@@ -135,8 +135,8 @@ export default function ActiveCoursesPage() {
                   <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="flex flex-col lg:flex-row">
                       <div className="lg:w-64 h-48 lg:h-auto">
-                        <img 
-                          src={course.thumbnail} 
+                        <img
+                          src={course.thumbnail}
                           alt={course.title}
                           className="w-full h-full object-cover"
                         />
@@ -180,7 +180,7 @@ export default function ActiveCoursesPage() {
                               </div>
                               <Progress value={course.progress} className="h-2" />
                             </div>
-                            
+
                             <div className="bg-blue-50 p-3 rounded-lg">
                               <p className="text-sm font-medium text-blue-900 mb-1">
                                 Bài tiếp theo:

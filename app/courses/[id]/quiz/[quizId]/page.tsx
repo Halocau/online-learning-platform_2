@@ -121,7 +121,7 @@ export default function QuizPage() {
   const courseId = params.id as string
 
   const quiz = quizData[quizId as keyof typeof quizData]
-  
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [timeRemaining, setTimeRemaining] = useState(quiz?.timeLimit || 0)
@@ -345,11 +345,10 @@ export default function QuizPage() {
               variant={index === currentQuestionIndex ? "default" : "outline"}
               size="sm"
               onClick={() => setCurrentQuestionIndex(index)}
-              className={`w-10 h-10 p-0 ${
-                answers.find(a => a.questionId === quiz.questions[index].id) 
-                  ? 'bg-green-100 border-green-300' 
+              className={`w-10 h-10 p-0 ${answers.find(a => a.questionId === quiz.questions[index].id)
+                  ? 'bg-green-100 border-green-300'
                   : ''
-              }`}
+                }`}
             >
               {index + 1}
             </Button>
@@ -383,13 +382,12 @@ export default function QuizPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => setCurrentQuestionIndex(index)}
-                  className={`h-10 ${
-                    index === currentQuestionIndex 
-                      ? 'border-blue-500 bg-blue-50' 
-                      : isAnswered 
-                        ? 'border-green-500 bg-green-50' 
+                  className={`h-10 ${index === currentQuestionIndex
+                      ? 'border-blue-500 bg-blue-50'
+                      : isAnswered
+                        ? 'border-green-500 bg-green-50'
                         : 'border-gray-200'
-                  }`}
+                    }`}
                 >
                   {index + 1}
                 </Button>
